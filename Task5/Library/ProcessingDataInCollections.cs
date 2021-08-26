@@ -44,6 +44,63 @@ namespace Library
 
             return (Reader)readership.SelectAll().Where(i => i.ReaderId == result);
         }
+
+        public string TheMostPopulatGenre()
+        {
+            var result = (from book in books.SelectAll()
+                          from issB in issuedBooks.SelectAll()
+                          where book.BookId == issB.BookId
+                          group book by book.Genre into temp
+                          select new
+                          {
+                              Genre = temp.Key,
+                              Count = temp.Count()
+                          }).OrderBy(i => i.Count).Last().Genre.ToString();
+            return result;
+        }
+
+        public List<Book> BooksRequiringRestoration()
+        {
+            var result = (from book in books.SelectAll()
+                          from issB in issuedBooks.SelectAll()
+                          where book.BookId == issB.BookId && issB.BookCondition <= 3
+                          select book).Distinct().ToList();
+            return result;
+        }
+
+        public List<(string name, int count)> CountOfBooks()
+        {
+            List<(string name, int count)> res = (List<(string name, int count)>)(from book in books.SelectAll()
+                         from issB in issuedBooks.SelectAll()
+                         where book.BookId == issB.BookId
+                         group book by book.BookName into temp
+                         select new
+                         {
+                             Name = temp.Key,
+                             Count = temp.Count()
+                         });
+
+            return res;
+        }
+
+        public List<(string readerName, string bookName, DateTime dateStart, DateTime dateEnd)> InformationAboutBorrowedBooks(DateTime startDate, DateTime endDate)
+        {
+            List<(string readerName, string bookName, DateTime dateStart, DateTime dateEnd)> res = (List<(string readerName, string bookName, DateTime dateStart, DateTime dateEnd)>)(from book in books.SelectAll()
+                           from issB in issuedBooks.SelectAll()
+                           from r in readership.SelectAll()
+                           where r.ReaderId == issB.ReaderId && issB.DateOfIssue >= startDate
+                           && issB.DateOfReturn <= endDate && book.BookId == issB.BookId
+                           select new
+                           {
+                               ReaderName = r.FirstName,
+                               ReaderSurname = r.Surname,
+                               Book = book.BookName,
+                               BookGenre = book.Genre,
+                               DateStart = issB.DateOfIssue,
+                               DateEnd = issB.DateOfReturn
+                           }).GroupBy(x => x.BookGenre);
+            return res;
+        }
     }
 }
   
