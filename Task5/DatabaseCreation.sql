@@ -1,0 +1,33 @@
+﻿CREATE DATABASE MyLibrary
+CREATE TABLE Readership
+(
+	ReaderId INT PRIMARY KEY IDENTITY,
+	Surname VARCHAR(20),
+	FirstName VARCHAR(20),
+	MiddleName VARCHAR(20),
+	Sex VARCHAR(10),
+	DateOfBirth Date
+);
+CREATE TABLE Books
+(
+	BookId INT PRIMARY KEY IDENTITY,
+	Author VARCHAR(20),
+	BookName VARCHAR(50),
+	Genre VARCHAR(20)
+);
+CREATE TABLE IssuedBooks
+(
+	IssuedBookId INT PRIMARY KEY IDENTITY,
+	ReaderId INT,
+	BookId INT,
+	DateOfIssue Date,
+	DateOfReturn Date,
+	BookReturn BIT,
+	BookCondition INT
+	FOREIGN KEY(ReaderId) REFERENCES Readership(ReaderId)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE,
+	FOREIGN KEY(BookId) REFERENCES Books(BookId)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+);
