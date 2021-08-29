@@ -2,15 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Library.Items.Reader;
 
 namespace Library.ProcessesDB.DAO
 {
+    /// <summary>
+    /// Class for reader DAO
+    /// </summary>
     public class ReadershipDAO : DbAccess<Reader>, IDAO<Reader>
     {
+        /// <summary>
+        /// Method for insert data about reader 
+        /// </summary>
+        /// <param name="obj">Reader object</param>
         public void Insert(Reader obj)
         {
             SqlCommand command = new("Insert Into Readership" +
@@ -25,6 +29,10 @@ namespace Library.ProcessesDB.DAO
             command.Dispose();
         }
 
+        /// <summary>
+        /// Method for update data about reader 
+        /// </summary>
+        /// <param name="obj">Reader object</param>
         public void Update(Reader obj)
         {
             SqlCommand command = new SqlCommand("Update Readership Set Surname = @Surname,  FirstName = @FirstName, MiddleName = @MiddleName, Sex = @Sex, DateOfBirth = @DateOfBirth  Where ReaderId = @ReaderId", connection);
@@ -40,6 +48,10 @@ namespace Library.ProcessesDB.DAO
             command.Dispose();
         }
 
+        /// <summary>
+        /// Method for delete data about reader 
+        /// </summary>
+        /// <param name="obj">Reader object</param>
         public void Delete(Reader obj)
         {
             SqlCommand command = new("Delete from Readership where ReaderId = @ReaderId", connection);
@@ -50,9 +62,12 @@ namespace Library.ProcessesDB.DAO
             command.Dispose();
         }
 
+        /// <summary>
+        /// Method for select data about reader
+        /// </summary>
+        /// <returns>list of reader</returns>
         public List<Reader> SelectAll()
         {
-            //creator.list.Clear();
             List<Reader> list = new();
             SqlCommand command = new($"SELECT * FROM Readership", connection);
             var reader = command.ExecuteReader();
@@ -60,14 +75,21 @@ namespace Library.ProcessesDB.DAO
             {
                 while (reader.Read())
                 {
-                    list.Add(createFactory.Creator(Convert.ToInt32(reader["ReaderId"]), reader["Surname"].ToString(), reader["FirstName"].ToString(), reader["MiddleName"].ToString(), ParseEnum<ReaderSex>(reader["Sex"].ToString()), Convert.ToDateTime(reader["DateOfBirth"])));
-                    //creator.FactoryCreate(Convert.ToInt32(r["BookId"]), r["Author"].ToString(), r["BookName"].ToString(), ParseEnum<BookGenre>(r["Genre"].ToString()));
+                    list.Add(createFactory.Creator(Convert.ToInt32(reader["ReaderId"]), reader["Surname"].ToString(), 
+                        reader["FirstName"].ToString(), reader["MiddleName"].ToString(), 
+                        ParseEnum<ReaderSex>(reader["Sex"].ToString()), Convert.ToDateTime(reader["DateOfBirth"])));
                 }
             }
             reader.Close();
             return list;
         }
 
+        /// <summary>
+        /// Method for parsing enum
+        /// </summary>
+        /// <typeparam name="T">generic type</typeparam>
+        /// <param name="value">string</param>
+        /// <returns>generic type</returns>
         private static T ParseEnum<T>(string value)
         {
             return (T)Enum.Parse(typeof(T), value, true);

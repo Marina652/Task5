@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library.Items
 {
+    /// <summary>
+    /// Class for issued book
+    /// </summary>
     public class IssuedBook
     {
         /// <summary>
@@ -21,6 +20,7 @@ namespace Library.Items
         /// Book id
         /// </summary>
         public int BookId { get; set; }
+
         /// <summary>
         /// Date of issue book
         /// </summary>
@@ -41,6 +41,16 @@ namespace Library.Items
         /// </summary>
         public int BookCondition { get; set; }
 
+        /// <summary>
+        /// Constructor with params
+        /// </summary>
+        /// <param name="issuedBookId">Issued book id</param>
+        /// <param name="readerId">Reader id</param>
+        /// <param name="bookId">Book id</param>
+        /// <param name="dateOfIssue">Date of issue</param>
+        /// <param name="dateOfReturn">Date of return</param>
+        /// <param name="bookReturn">Book return? (true or false)</param>
+        /// <param name="bookCondition">Book condition</param>
         public IssuedBook(int issuedBookId, int readerId, int bookId, DateTime dateOfIssue, DateTime dateOfReturn, bool bookReturn, int bookCondition)
         {
             IssuedBookId = issuedBookId;

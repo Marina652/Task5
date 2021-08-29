@@ -2,15 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Library.Items.Book;
 
 namespace Library.ProcessesDB.DAO
 {
+    /// <summary>
+    /// Class for book DAO
+    /// </summary>
     public class BookDAO : DbAccess<Book>, IDAO<Book>
     {
+        /// <summary>
+        /// Method for insert data about book 
+        /// </summary>
+        /// <param name="obj">Book object</param>
         public void Insert(Book obj)
         {
             SqlCommand command = new("Insert Into Books" +
@@ -23,6 +27,10 @@ namespace Library.ProcessesDB.DAO
             command.Dispose();
         }
 
+        /// <summary>
+        /// Method for update data about book 
+        /// </summary>
+        /// <param name="obj">Book object</param>
         public void Update(Book obj)
         {
             SqlCommand command = new("Update Books Set Author = @Author,  BookName = @BookName, Genre = @Genre Where BookId = @BookId", connection);
@@ -36,6 +44,10 @@ namespace Library.ProcessesDB.DAO
             command.Dispose();
         }
 
+        /// <summary>
+        /// Method for delete data about book 
+        /// </summary>
+        /// <param name="obj">Book object</param>
         public void Delete(Book obj)
         {
             SqlCommand command = new("Delete from Books where BookId = @BookId", connection);
@@ -46,6 +58,10 @@ namespace Library.ProcessesDB.DAO
             command.Dispose();
         }
 
+        /// <summary>
+        /// Method for select data about book 
+        /// </summary>
+        /// <returns>list of books</returns>
         public List<Book> SelectAll()
         {
             //creator.list.Clear();
@@ -59,13 +75,18 @@ namespace Library.ProcessesDB.DAO
                     list.Add(createFactory.Creator(Convert.ToInt32(reader["BookId"]),
                         reader["Author"].ToString(), reader["BookName"].ToString(),
                         ParseEnum<BookGenre>(reader["Genre"].ToString())));
-                    //creator.FactoryCreate(Convert.ToInt32(r["BookId"]), r["Author"].ToString(), r["BookName"].ToString(), ParseEnum<BookGenre>(r["Genre"].ToString()));
                 }
             }
             reader.Close();
             return list;
         }
 
+        /// <summary>
+        /// Method for parsing enum
+        /// </summary>
+        /// <typeparam name="T">generic type</typeparam>
+        /// <param name="value">string</param>
+        /// <returns>generic type</returns>
         private static T ParseEnum<T>(string value)
         {
             return (T)Enum.Parse(typeof(T), value, true);

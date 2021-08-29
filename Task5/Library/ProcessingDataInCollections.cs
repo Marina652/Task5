@@ -1,11 +1,8 @@
 ﻿using Library.Items;
-using Library.ProcessesDB;
 using Library.ProcessesDB.DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library
 {
@@ -68,7 +65,7 @@ namespace Library
             return result;
         }
 
-        public List<(string name, int count)> CountOfBooks()
+        public List<string> CountOfBooks()
         {
             List<(string name, int count)> res = (List<(string name, int count)>)(from book in books.SelectAll()
                          from issB in issuedBooks.SelectAll()
@@ -79,11 +76,15 @@ namespace Library
                              Name = temp.Key,
                              Count = temp.Count()
                          });
-
-            return res;
+            List<string> list = new();
+            foreach (var i in res)
+            {
+                list.Add(i.name + "   " + i.count);
+            }
+            return list;
         }
 
-        public List<(string readerName, string bookName, DateTime dateStart, DateTime dateEnd)> InformationAboutBorrowedBooks(DateTime startDate, DateTime endDate)
+        public List<string> InformationAboutBorrowedBooks(DateTime startDate, DateTime endDate)
         {
             List<(string readerName, string bookName, DateTime dateStart, DateTime dateEnd)> res = (List<(string readerName, string bookName, DateTime dateStart, DateTime dateEnd)>)(from book in books.SelectAll()
                            from issB in issuedBooks.SelectAll()
@@ -99,7 +100,13 @@ namespace Library
                                DateStart = issB.DateOfIssue,
                                DateEnd = issB.DateOfReturn
                            }).GroupBy(x => x.BookGenre);
-            return res;
+
+            List<string> list = new();
+            foreach(var i in res)
+            {
+                list.Add(i.readerName + "   " + i.bookName + "   " + i.dateStart + "   " + i.dateEnd);
+            }
+            return list;
         }
     }
 }

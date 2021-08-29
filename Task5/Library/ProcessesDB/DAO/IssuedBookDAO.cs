@@ -2,20 +2,24 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library.ProcessesDB.DAO
 {
+    /// <summary>
+    /// Class for issued book DAO
+    /// </summary>
     public class IssuedBookDAO : DbAccess<IssuedBook>, IDAO<IssuedBook>
     {
+        /// <summary>
+        /// Method for insert data about issued book 
+        /// </summary>
+        /// <param name="obj">Issued book object</param>
         public void Insert(IssuedBook obj)
         {
             SqlCommand command = new("Insert Into IssuedBooks" +
                              "(ReaderId, BookId, DataOeIssue, DateOfReturn, BookReturn, BookCondition) " +
                              "Values(@ReaderId, @BookId, @DataOeIssue, @DateOfReturn, @BookReturn, @BookCondition)", connection);
-            //command.Parameters.AddWithValue("@IssuedBookId", obj.IssuedBookId);
+
             command.Parameters.AddWithValue("@ReaderId", obj.ReaderId);
             command.Parameters.AddWithValue("@BookId", obj.BookId);
             command.Parameters.AddWithValue("@DateOfIssue", obj.DateOfIssue);
@@ -27,6 +31,10 @@ namespace Library.ProcessesDB.DAO
             command.Dispose();
         }
 
+        /// <summary>
+        /// Method for update data about issued book 
+        /// </summary>
+        /// <param name="obj">Issued book object</param>
         public void Update(IssuedBook obj)
         {
             SqlCommand command = new("Update IssuedBooks Set ReaderId = @ReaderId,  " +
@@ -45,6 +53,10 @@ namespace Library.ProcessesDB.DAO
             command.Dispose();
         }
 
+        /// <summary>
+        /// Method for delete data about issued book 
+        /// </summary>
+        /// <param name="obj">Issued book object</param>
         public void Delete(IssuedBook obj)
         {
             SqlCommand command = new("Delete from IssuedBooks where IssuedBookId = @IssuedBookId", connection);
@@ -55,9 +67,12 @@ namespace Library.ProcessesDB.DAO
             command.Dispose();
         }
 
+        /// <summary>
+        /// Method for delete data about issued book 
+        /// </summary>
+        /// <returns>list of issued book</returns>
         public List<IssuedBook> SelectAll()
         {
-            //creator.list.Clear();
             List<IssuedBook> list = new();
             SqlCommand command = new($"SELECT * FROM IssuedBooks", connection);
             var reader = command.ExecuteReader();
@@ -68,16 +83,10 @@ namespace Library.ProcessesDB.DAO
                     list.Add(createFactory.Creator(Convert.ToInt32(reader["IssuedBookId"]), Convert.ToInt32(reader["ReaderId"]), 
                         Convert.ToInt32(reader["BookId"]), Convert.ToDateTime(reader["DateOfIssue"]), Convert.ToDateTime(reader["DateOfReturn"]), 
                         Convert.ToBoolean(reader["BookReturn"]), Convert.ToInt32(reader["BookCondition"])));
-                    //creator.FactoryCreate(Convert.ToInt32(r["BookId"]), r["Author"].ToString(), r["BookName"].ToString(), ParseEnum<BookGenre>(r["Genre"].ToString()));
                 }
             }
             reader.Close();
             return list;
         }
-
-        //private static T ParseEnum<T>(string value)
-        //{
-        //    return (T)Enum.Parse(typeof(T), value, true);
-        //}
     }
 }

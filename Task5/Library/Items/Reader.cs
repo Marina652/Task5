@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library.Items
 {
+    /// <summary>
+    /// Class for reader
+    /// </summary>
     public class Reader
     {
         /// <summary>
@@ -27,6 +26,7 @@ namespace Library.Items
         /// Reader middle name
         /// </summary>
         public string MiddleName { get; set; }
+
         /// <summary>
         /// Reader sex
         /// </summary>
@@ -37,16 +37,19 @@ namespace Library.Items
         /// </summary>
         public DateTime DateOfBirth { get; set; }
 
+        /// <summary>
+        /// Inner enum for reader sex
+        /// </summary>
         public enum ReaderSex
         {
             /// <summary>
             /// male view
             /// </summary>
-            male = 1,
+            mal,
             /// <summary>
             /// female view
             /// </summary>
-            female
+            fem
         }
     }
 }
