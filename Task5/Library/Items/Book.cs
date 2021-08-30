@@ -40,7 +40,33 @@
             Genre = genre;
         }
 
+        /// <summary>
+        /// Empty constructor
+        /// </summary>
+        public Book() { }
+
+        /// <summary>
+        /// Override method ToString()
+        /// </summary>
+        /// <returns>string</returns>
         public override string ToString() => BookName + ", " + Author;
+
+        /// <summary>
+        /// Override method GetHashCode()
+        /// </summary>
+        /// <returns>hash-code</returns>
+        public override int GetHashCode() => BookId;
+        
+        /// <summary>
+        /// Override method Equals()
+        /// </summary>
+        /// <param name="obj">object</param>
+        /// <returns>true or false</returns>
+        public override bool Equals(object obj) => obj is Book book &&
+                 BookId == book.BookId &&
+                 Author == book.Author &&
+                 BookName == book.BookName &&
+                 Genre == book.Genre;
 
         /// <summary>
         /// Inner enum for book genre

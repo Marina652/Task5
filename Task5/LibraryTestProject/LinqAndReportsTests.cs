@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace LibraryTestProject
 {
     [TestFixture]
-    public class LinqTests
+    public class LinqAndReportsTests
     {
 
         [Test]
@@ -56,11 +56,11 @@ namespace LibraryTestProject
         {
             ProcessingDataInCollections processing = new();
             List<string> myList = new();
-            myList.Add("Harry Potter and the philosopher's stone   1");
-            myList.Add("The Hound of the Baskervilles   1");
-            myList.Add("The Adventures of Sherlock Holmes   2");
-            myList.Add("The Stars, Like Dust   1");
-            myList.Add("Scarlet Sails   1");
+            myList.Add("Harry Potter and the philosopher's stone;1");
+            myList.Add("The Hound of the Baskervilles;1");
+            myList.Add("The Adventures of Sherlock Holmes;2");
+            myList.Add("The Stars, Like Dust;1");
+            myList.Add("Scarlet Sails;1");
             Assert.AreEqual(processing.CountOfBooks(), myList);
         }
 
@@ -69,9 +69,9 @@ namespace LibraryTestProject
         {
             ProcessingDataInCollections processing = new();
             List<string> myList = new();
-            myList.Add("Alexsandr Pechkin, The Adventures of Sherlock Holmes, 21.05.2021 0:00:00, 05.06.2021 0:00:00");
-            myList.Add("Ivan Ivanov, The Stars, Like Dust, 02.06.2021 0:00:00, 21.09.2021 0:00:00");
-            myList.Add("Ekaterina Ostapova, Scarlet Sails, 05.04.2021 0:00:00, 03.07.2021 0:00:00");
+            myList.Add("Alexsandr Pechkin; The Adventures of Sherlock Holmes;21.05.2021 0:00:00;05.06.2021 0:00:00;");
+            myList.Add("Ivan Ivanov; The Stars, Like Dust;02.06.2021 0:00:00;21.09.2021 0:00:00;");
+            myList.Add("Ekaterina Ostapova; Scarlet Sails;05.04.2021 0:00:00;03.07.2021 0:00:00;");
             Assert.AreEqual(processing.InformationAboutBorrowedBooksForThePeriod(new DateTime(2021, 3, 1), new DateTime(2021, 10, 1)), myList);
         }
 
@@ -81,7 +81,9 @@ namespace LibraryTestProject
             ProcessingDataInCollections processing = new();
             CreateTxtFile.Report("../../../Reports/ReportTxt.txt", processing.CountOfBooks());
             CreatePdfFile.Report("../../../Reports/ReportPdf.pdf", processing.InformationAboutBorrowedBooksForThePeriod(new DateTime(2021, 3, 1), new DateTime(2021, 10, 1)));
-            CreateXlsxFile.Report("../../../Reports/ReportXslx.xlsx", processing.InformationAboutBorrowedBooksForThePeriod(new DateTime(2021, 3, 1), new DateTime(2021, 10, 1)));
+            //CreateXlsxFile.Report("../../../Reports/ReportXslx.xlsx", processing.InformationAboutBorrowedBooksForThePeriod(new DateTime(2021, 3, 1), new DateTime(2021, 10, 1)));
+            CreateXlsxFile.Report("../../../Reports/ReportXslx.xlsx", processing.CountOfBooks());
+            //CreateReports();
         }
     }
 }

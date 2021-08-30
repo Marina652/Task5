@@ -15,14 +15,14 @@ namespace Library
         public string TheMostPopulatAuthor()
         {
             var result = (from book in books.SelectAll()
-                       from issB in issuedBooks.SelectAll()
-                       where book.BookId == issB.BookId
-                       group book by book.Author into temp
-                       select new
-                       {
-                           AuthorName = temp.Key,
-                           Count = temp.Count()
-                       }).OrderBy(i => i.Count).Last().AuthorName;
+                          from issB in issuedBooks.SelectAll()
+                          where book.BookId == issB.BookId
+                          group book by book.Author into temp
+                          select new
+                          {
+                              AuthorName = temp.Key,
+                              Count = temp.Count()
+                          }).OrderBy(i => i.Count).Last().AuthorName;
             return result;
         }
 
@@ -68,18 +68,18 @@ namespace Library
         public List<string> CountOfBooks()
         {
             var res = (from book in books.SelectAll()
-                                                  from issB in issuedBooks.SelectAll()
-                                                  where book.BookId == issB.BookId
-                                                  group book by book.BookName into temp
-                                                  select new
-                                                  {
-                                                      Name = temp.Key,
-                                                      Count = temp.Count()
-                                                  }).ToList();
+                       from issB in issuedBooks.SelectAll()
+                       where book.BookId == issB.BookId
+                       group book by book.BookName into temp
+                       select new
+                       {
+                           Name = temp.Key,
+                           Count = temp.Count()
+                       }).ToList();
             List<string> list = new();
             foreach (var i in res)
             {
-                list.Add(i.Name + "   " + i.Count);
+                list.Add(i.Name + ";" + i.Count);
             }
             return list;
         }
@@ -104,7 +104,7 @@ namespace Library
             List<string> list = new();
             foreach(var i in res)
             {
-                list.Add(i.ReaderName + " " + i.ReaderSurname + ", " + i.Book + ", " + i.DateStart + ", " + i.DateEnd);
+                list.Add(i.ReaderName + " " + i.ReaderSurname + "; " + i.Book + ";" + i.DateStart + ";" + i.DateEnd + ";");
             }
             return list;
         }

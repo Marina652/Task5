@@ -61,5 +61,36 @@ namespace Library.Items
             BookReturn = bookReturn;
             BookCondition = bookCondition;
         }
+
+        /// <summary>
+        /// Empty constructor
+        /// </summary>
+        public IssuedBook() { }
+
+        /// <summary>
+        /// Override method ToString()
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString() => base.ToString();
+
+        /// <summary>
+        /// Override method GetHashCode()
+        /// </summary>
+        /// <returns>hash-code</returns>
+        public override int GetHashCode() => IssuedBookId;
+
+        /// <summary>
+        /// Override method Equals()
+        /// </summary>
+        /// <param name="obj">object</param>
+        /// <returns>true or false</returns>
+        public override bool Equals(object obj) => obj is IssuedBook issuedBook &&
+                 BookId == issuedBook.BookId &&
+                 ReaderId == issuedBook.ReaderId &&
+                 BookId == issuedBook.BookId &&
+                 DateOfIssue == issuedBook.DateOfIssue &&
+                 DateOfReturn == issuedBook.DateOfReturn &&
+                 BookReturn == issuedBook.BookReturn &&
+                 BookCondition == BookCondition;
     }
 }
