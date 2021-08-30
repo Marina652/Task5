@@ -6,12 +6,30 @@ using System.Linq;
 
 namespace Library
 {
+    /// <summary>
+    /// Class for processing data with collection
+    /// </summary>
     public class ProcessingDataInCollections
     {
-        private readonly BookDAO books = new BookDAO();
-        private readonly IssuedBookDAO issuedBooks = new IssuedBookDAO();
-        private readonly ReadershipDAO readership = new ReadershipDAO();
+        /// <summary>
+        /// Object DAO book
+        /// </summary>
+        private readonly BookDAO books = new();
 
+        /// <summary>
+        /// Object DAO issued book
+        /// </summary>
+        private readonly IssuedBookDAO issuedBooks = new();
+
+        /// <summary>
+        /// Object DAO reader
+        /// </summary>
+        private readonly ReadershipDAO readership = new();
+
+        /// <summary>
+        /// Method for finding the most popular author
+        /// </summary>
+        /// <returns>string</returns>
         public string TheMostPopulatAuthor()
         {
             var result = (from book in books.SelectAll()
@@ -26,9 +44,12 @@ namespace Library
             return result;
         }
 
+        /// <summary>
+        /// Method for finding the most reading subscriber
+        /// </summary>
+        /// <returns>list of readers</returns>
         public List<Reader> TheMostReadingSubscriber()
         {
-
             var result = (from readership in readership.SelectAll()
                           from issB in issuedBooks.SelectAll()
                           where readership.ReaderId == issB.ReaderId
@@ -42,6 +63,10 @@ namespace Library
             return readership.SelectAll().Where(i => i.ReaderId == result).ToList();
         }
 
+        /// <summary>
+        /// Method for find the most popular genre
+        /// </summary>
+        /// <returns>string</returns>
         public string TheMostPopulatGenre()
         {
             var result = (from book in books.SelectAll()
@@ -56,6 +81,10 @@ namespace Library
             return result;
         }
 
+        /// <summary>
+        /// Method for find books requiring restiration
+        /// </summary>
+        /// <returns>list of books</returns>
         public List<Book> BooksRequiringRestoration()
         {
             var result = (from book in books.SelectAll()
@@ -65,6 +94,10 @@ namespace Library
             return result;
         }
 
+        /// <summary>
+        /// information about how many times have each book been taken
+        /// </summary>
+        /// <returns>list of string</returns>
         public List<string> CountOfBooks()
         {
             var res = (from book in books.SelectAll()
@@ -78,12 +111,16 @@ namespace Library
                        }).ToList();
             List<string> list = new();
             foreach (var i in res)
-            {
-                list.Add(i.Name + ";" + i.Count);
-            }
+                list.Add(i.Name + "; " + i.Count);
             return list;
         }
 
+        /// <summary>
+        /// Information about borrowed books for the period
+        /// </summary>
+        /// <param name="startDate">Start date</param>
+        /// <param name="endDate">End date</param>
+        /// <returns>list of string</returns>
         public List<string> InformationAboutBorrowedBooksForThePeriod(DateTime startDate, DateTime endDate)
         {
             var res = (from book in books.SelectAll()
@@ -103,9 +140,7 @@ namespace Library
 
             List<string> list = new();
             foreach(var i in res)
-            {
-                list.Add(i.ReaderName + " " + i.ReaderSurname + "; " + i.Book + ";" + i.DateStart + ";" + i.DateEnd + ";");
-            }
+                list.Add(i.ReaderName + " " + i.ReaderSurname + "; " + i.Book + "; " + i.DateStart + "; " + i.DateEnd + ";");
             return list;
         }
     }

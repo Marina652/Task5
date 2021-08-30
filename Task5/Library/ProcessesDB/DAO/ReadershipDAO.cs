@@ -11,15 +11,6 @@ namespace Library.ProcessesDB.DAO
     /// </summary>
     public class ReadershipDAO : DbAccess<Reader>, IDAO<Reader>
     {
-        //public void Truncate()
-        //{
-        //    SqlCommand command = new("TRUNCATE TABLE Readership", connection);
-
-
-        //    command.ExecuteNonQuery();
-        //    command.Dispose();
-        //}
-
         /// <summary>
         /// Method for insert data about reader 
         /// </summary>
@@ -84,7 +75,7 @@ namespace Library.ProcessesDB.DAO
             {
                 while (reader.Read())
                 {
-                    list.Add(createFactory.Creator(Convert.ToInt32(reader["ReaderId"]), reader["Surname"].ToString(), 
+                    list.Add(create.Creator(Convert.ToInt32(reader["ReaderId"]), reader["Surname"].ToString(), 
                         reader["FirstName"].ToString(), reader["MiddleName"].ToString(), 
                         ParseEnum<ReaderSex>(reader["Sex"].ToString()), Convert.ToDateTime(reader["DateOfBirth"])));
                 }

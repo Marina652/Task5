@@ -10,15 +10,6 @@ namespace Library.ProcessesDB.DAO
     /// </summary>
     public class IssuedBookDAO : DbAccess<IssuedBook>, IDAO<IssuedBook>
     {
-        //public void Truncate()
-        //{
-        //    SqlCommand command = new("TRUNCATE TABLE IssuedBooks", connection);
-
-
-        //    command.ExecuteNonQuery();
-        //    command.Dispose();
-        //}
-
         /// <summary>
         /// Method for insert data about issued book 
         /// </summary>
@@ -89,7 +80,7 @@ namespace Library.ProcessesDB.DAO
             {
                 while (reader.Read())
                 {
-                    list.Add(createFactory.Creator(Convert.ToInt32(reader["IssuedBookId"]), Convert.ToInt32(reader["ReaderId"]), 
+                    list.Add(create.Creator(Convert.ToInt32(reader["IssuedBookId"]), Convert.ToInt32(reader["ReaderId"]), 
                         Convert.ToInt32(reader["BookId"]), Convert.ToDateTime(reader["DateOfIssue"]), Convert.ToDateTime(reader["DateOfReturn"]), 
                         Convert.ToBoolean(reader["BookReturn"]), Convert.ToInt32(reader["BookCondition"])));
                 }

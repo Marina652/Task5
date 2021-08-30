@@ -18,12 +18,10 @@ namespace Library.FormationReport
         {
             try
             {
-                using (StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.Default))
+                using (StreamWriter sw = new(path, false, System.Text.Encoding.Default))
                 {
                    foreach(var i in list)
-                   {
                         sw.WriteLine(i);
-                   }
                 }
             }
             catch (Exception e)
