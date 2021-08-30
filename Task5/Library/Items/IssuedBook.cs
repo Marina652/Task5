@@ -48,7 +48,7 @@ namespace Library.Items
         /// <param name="readerId">Reader id</param>
         /// <param name="bookId">Book id</param>
         /// <param name="dateOfIssue">Date of issue</param>
-        /// <param name="dateOfReturn">Date of return</param>
+        /// <param name="dateOfReturn">The date until which you must return the book</param>
         /// <param name="bookReturn">Book return? (true or false)</param>
         /// <param name="bookCondition">Book condition</param>
         public IssuedBook(int issuedBookId, int readerId, int bookId, DateTime dateOfIssue, DateTime dateOfReturn, bool bookReturn, int bookCondition)

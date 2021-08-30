@@ -38,6 +38,28 @@ namespace Library.Items
         public DateTime DateOfBirth { get; set; }
 
         /// <summary>
+        /// Constructor with params
+        /// </summary>
+        /// <param name="readerId">Reader id</param>
+        /// <param name="surname">Reader surname</param>
+        /// <param name="firstName">Reader first name</param>
+        /// <param name="middleName">Reader middle name</param>
+        /// <param name="sex">Reader sex</param>
+        /// <param name="dateOfBirth">Reader date of birth</param>
+        public Reader(int readerId, string surname, string firstName, string middleName, ReaderSex sex, DateTime dateOfBirth)
+        {
+            ReaderId = readerId;
+            Surname = surname;
+            FirstName = firstName;
+            MiddleName = middleName;
+            Sex = sex;
+            DateOfBirth = dateOfBirth;
+        }
+
+        public override string ToString() => Surname + " " + FirstName + " " + 
+            MiddleName + " " + Sex + " " + DateOfBirth;
+
+        /// <summary>
         /// Inner enum for reader sex
         /// </summary>
         public enum ReaderSex

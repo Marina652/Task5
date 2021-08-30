@@ -40,6 +40,8 @@
             Genre = genre;
         }
 
+        public override string ToString() => BookName + ", " + Author;
+
         /// <summary>
         /// Inner enum for book genre
         /// </summary>

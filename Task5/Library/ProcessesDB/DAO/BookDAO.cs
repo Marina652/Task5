@@ -11,6 +11,15 @@ namespace Library.ProcessesDB.DAO
     /// </summary>
     public class BookDAO : DbAccess<Book>, IDAO<Book>
     {
+        //public void Truncate()
+        //{
+        //    SqlCommand command = new("TRUNCATE TABLE Books", connection);
+            
+
+        //    command.ExecuteNonQuery();
+        //    command.Dispose();
+        //}
+
         /// <summary>
         /// Method for insert data about book 
         /// </summary>

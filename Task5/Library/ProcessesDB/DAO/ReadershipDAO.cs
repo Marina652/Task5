@@ -11,6 +11,15 @@ namespace Library.ProcessesDB.DAO
     /// </summary>
     public class ReadershipDAO : DbAccess<Reader>, IDAO<Reader>
     {
+        //public void Truncate()
+        //{
+        //    SqlCommand command = new("TRUNCATE TABLE Readership", connection);
+
+
+        //    command.ExecuteNonQuery();
+        //    command.Dispose();
+        //}
+
         /// <summary>
         /// Method for insert data about reader 
         /// </summary>

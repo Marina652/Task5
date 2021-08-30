@@ -10,6 +10,15 @@ namespace Library.ProcessesDB.DAO
     /// </summary>
     public class IssuedBookDAO : DbAccess<IssuedBook>, IDAO<IssuedBook>
     {
+        //public void Truncate()
+        //{
+        //    SqlCommand command = new("TRUNCATE TABLE IssuedBooks", connection);
+
+
+        //    command.ExecuteNonQuery();
+        //    command.Dispose();
+        //}
+
         /// <summary>
         /// Method for insert data about issued book 
         /// </summary>
@@ -17,13 +26,13 @@ namespace Library.ProcessesDB.DAO
         public void Insert(IssuedBook obj)
         {
             SqlCommand command = new("Insert Into IssuedBooks" +
-                             "(ReaderId, BookId, DataOeIssue, DateOfReturn, BookReturn, BookCondition) " +
-                             "Values(@ReaderId, @BookId, @DataOeIssue, @DateOfReturn, @BookReturn, @BookCondition)", connection);
+                             "(ReaderId, BookId, DateOfIssue, DateOfReturn, BookReturn, BookCondition) " +
+                             "Values(@ReaderId, @BookId, @DateOfIssue, @DateOfReturn, @BookReturn, @BookCondition)", connection);
 
             command.Parameters.AddWithValue("@ReaderId", obj.ReaderId);
             command.Parameters.AddWithValue("@BookId", obj.BookId);
             command.Parameters.AddWithValue("@DateOfIssue", obj.DateOfIssue);
-            command.Parameters.AddWithValue("@DateOgReturn", obj.DateOfReturn);
+            command.Parameters.AddWithValue("@DateOfReturn", obj.DateOfReturn);
             command.Parameters.AddWithValue("@BookReturn", obj.BookReturn);
             command.Parameters.AddWithValue("@BookCondition", obj.BookCondition);
 
