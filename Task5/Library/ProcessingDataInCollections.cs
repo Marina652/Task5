@@ -95,7 +95,7 @@ namespace Library
         }
 
         /// <summary>
-        /// information about how many times have each book been taken
+        /// Information about how many times have each book been taken
         /// </summary>
         /// <returns>list of string</returns>
         public List<string> CountOfBooks()
@@ -141,6 +141,27 @@ namespace Library
             List<string> list = new();
             foreach(var i in res)
                 list.Add(i.ReaderName + " " + i.ReaderSurname + "; " + i.Book + "; " + i.DateStart + "; " + i.DateEnd + ";");
+            return list;
+        }
+
+        /// <summary>
+        /// Information about borrowed books by genre
+        /// </summary>
+        /// <returns>list of string</returns>
+        public List<string> BorrowedBooksByGenre()
+        {
+            var res = (from book in books.SelectAll()
+                       from issB in issuedBooks.SelectAll()
+                       where book.BookId == issB.BookId
+                       group book by book.Genre into temp
+                       select new
+                       {
+                           GenreName = temp.Key,
+                           Count = temp.Count()
+                       }).ToList();
+            List<string> list = new();
+            foreach (var i in res)
+                list.Add(i.GenreName + "; " + i.Count);
             return list;
         }
     }

@@ -51,12 +51,12 @@ namespace Library.ProcessesDB.DAO
         /// <summary>
         /// Method for delete data about reader 
         /// </summary>
-        /// <param name="obj">Reader object</param>
-        public void Delete(Reader obj)
+        /// <param name="id">ID</param>
+        public void Delete(int id)
         {
             SqlCommand command = new("Delete from Readership where ReaderId = @ReaderId", connection);
 
-            command.Parameters.AddWithValue("@ReaderId", obj.ReaderId);
+            command.Parameters.AddWithValue("@ReaderId", id);
 
             command.ExecuteNonQuery();
             command.Dispose();

@@ -47,12 +47,12 @@ namespace Library.ProcessesDB.DAO
         /// <summary>
         /// Method for delete data about book 
         /// </summary>
-        /// <param name="obj">Book object</param>
-        public void Delete(Book obj)
+        /// <param name="id">Id</param>
+        public void Delete(int id)
         {
             SqlCommand command = new("Delete from Books where BookId = @BookId", connection);
 
-            command.Parameters.AddWithValue("@BookId", obj.BookId);
+            command.Parameters.AddWithValue("@BookId", id);
 
             command.ExecuteNonQuery();
             command.Dispose();

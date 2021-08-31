@@ -15,8 +15,8 @@
         /// <summary>
         /// Method for delete data
         /// </summary>
-        /// <param name="obj">generic type</param>
-        public void Delete(T obj);
+        /// <param name="id">ID</param>
+        public void Delete(int id);
 
         /// <summary>
         /// Method for update data

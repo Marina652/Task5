@@ -45,7 +45,7 @@ namespace Library.ProcessesDB.DAO
             command.Parameters.AddWithValue("@ReaderId", obj.ReaderId);
             command.Parameters.AddWithValue("@BookId", obj.BookId);
             command.Parameters.AddWithValue("@DateOfIssue", obj.DateOfIssue);
-            command.Parameters.AddWithValue("@DateOgReturn", obj.DateOfReturn);
+            command.Parameters.AddWithValue("@DateOfReturn", obj.DateOfReturn);
             command.Parameters.AddWithValue("@BookReturn", obj.BookReturn);
             command.Parameters.AddWithValue("@BookCondition", obj.BookCondition);
 
@@ -56,12 +56,12 @@ namespace Library.ProcessesDB.DAO
         /// <summary>
         /// Method for delete data about issued book 
         /// </summary>
-        /// <param name="obj">Issued book object</param>
-        public void Delete(IssuedBook obj)
+        /// <param name="id">Issued book object</param>
+        public void Delete(int id)
         {
             SqlCommand command = new("Delete from IssuedBooks where IssuedBookId = @IssuedBookId", connection);
 
-            command.Parameters.AddWithValue("@IssuedBookId", obj.IssuedBookId);
+            command.Parameters.AddWithValue("@IssuedBookId", id);
 
             command.ExecuteNonQuery();
             command.Dispose();

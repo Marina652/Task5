@@ -39,7 +39,7 @@
         private void CreateTxtReport()
         {
             ProcessingDataInCollections processing = new();
-            CreateTxtFile.Report("../../../ReportTxt.txt", processing.CountOfBooks());
+            CreateTxtFile.Report("../../../Reports/EventReportTxt.txt", processing.CountOfBooks());
         }
 
         /// <summary>
@@ -48,7 +48,7 @@
         private void CreatePdfReport()
         {
             ProcessingDataInCollections processing = new();
-            CreatePdfFile.Report("../../../ReportPdf.pdf", processing.CountOfBooks());
+            CreatePdfFile.Report("../../../Reports/EventReportPdf.pdf", processing.CountOfBooks());
         }
 
         /// <summary>
@@ -57,7 +57,7 @@
         private void CreateXlsxReport()
         {
             ProcessingDataInCollections processing = new();
-            CreateXlsxFile.Report("../../../ReportXlsx.xlsx", processing.CountOfBooks());
+            CreateXlsxFile.Report("../../../Reports/EventReportXlsx.xlsx", processing.CountOfBooks());
         }
     }
 }
